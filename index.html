@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020617">
+  <title>محاكي قرارات المدير أحمد: إدارة البيانات والأزمات في مخبز القمح الذهبي</title>
+  <meta name="description" content="محاكي صفي للصف الحادي عشر، الوحدة الأولى، هدف التعلم ب: عشرون موقفاً لاتخاذ القرار في مخبز القمح الذهبي اعتماداً على البيانات والميزانية والتشغيل.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231e1b4b'/%3E%3Cpath d='M16 26V12' stroke='%23fbbf24' stroke-width='2' stroke-linecap='round'/%3E%3Cellipse cx='16' cy='9' rx='2.2' ry='3.2' fill='%23fde68a'/%3E%3Cpath d='M16 20c-3-1-5-3-5-5 2 .2 4 1.4 5 3.2 1-1.8 3-3 5-3.2 0 2-2 4-5 5z' fill='%23fbbf24'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <script>
+    try {
+      if (localStorage.getItem("ahmed-theme") === "light") document.documentElement.classList.remove("dark");
+    } catch (err) {}
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Tajawal", "Segoe UI", "Tahoma", "sans-serif"],
+            display: ["El Messiri", "Tajawal", "Tahoma", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    html:not(.dark) { color-scheme: light; }
+    body { font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif; line-height: 1.85; }
+    .font-display { font-family: "El Messiri", "Tajawal", Tahoma, serif; }
+    :focus-visible { outline: 2px solid #818cf8; outline-offset: 3px; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    [data-tone="amber"] { --c: #b45309; }
+    [data-tone="sky"] { --c: #0369a1; }
+    [data-tone="rose"] { --c: #be123c; }
+    [data-tone="violet"] { --c: #6d28d9; }
+    [data-tone="teal"] { --c: #0f766e; }
+    [data-tone="emerald"] { --c: #047857; }
+    html.dark [data-tone="amber"] { --c: #fbbf24; }
+    html.dark [data-tone="sky"] { --c: #7dd3fc; }
+    html.dark [data-tone="rose"] { --c: #fda4af; }
+    html.dark [data-tone="violet"] { --c: #c4b5fd; }
+    html.dark [data-tone="teal"] { --c: #5eead4; }
+    html.dark [data-tone="emerald"] { --c: #6ee7b7; }
+    #scenario-card { border-top: 4px solid var(--c, #4f46e5); scroll-margin-top: 5.5rem; }
+    #speech-wrap { border-inline-start: 4px solid var(--c, #4f46e5); }
+    #avatar { background: var(--c, #4f46e5); color: #fff; }
+    .badge {
+      background: color-mix(in srgb, var(--c) 14%, #fff);
+      color: color-mix(in srgb, var(--c) 78%, #000);
+    }
+    html.dark .badge {
+      background: color-mix(in srgb, var(--c) 18%, transparent);
+      color: var(--c);
+    }
+    .legend::before {
+      content: "";
+      display: inline-block;
+      width: 0.7rem;
+      height: 0.7rem;
+      margin-inline-end: 0.4rem;
+      border-radius: 999px;
+      background: var(--c);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent);
+    }
+    .stat { transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+    .stat.is-hot {
+      border-color: #f59e0b !important;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.28);
+    }
+    .analysis {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .analysis.is-open { grid-template-rows: 1fr; }
+    #analysis-panel { min-height: 0; overflow: hidden; }
+    .chevron { transition: transform 0.3s ease; }
+    #toggle-analysis[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    .map-btn {
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+      border: 2px solid var(--c, #64748b);
+      border-radius: 0.9rem;
+      font-weight: 800;
+      background: transparent;
+    }
+    .map-btn[aria-current="true"] { background: var(--c); color: #fff; }
+    .map-btn.is-seen:not([aria-current="true"]) {
+      background: color-mix(in srgb, var(--c) 16%, transparent);
+    }
+    .map-btn:hover:not(:disabled) { transform: translateY(-1px); }
+    .cmp { width: 100%; border-collapse: collapse; }
+    .cmp caption { caption-side: top; padding-bottom: 0.6rem; text-align: start; font-weight: 800; }
+    .cmp th, .cmp td { border: 1px solid #e7e5e4; padding: 0.55rem 0.75rem; text-align: start; vertical-align: top; }
+    html.dark .cmp th, html.dark .cmp td { border-color: #334155; }
+    .cmp th { font-weight: 800; }
+    .rise { animation: rise 0.38s ease; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-stone-100 font-sans text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+  <a class="sr-only focus:not-sr-only focus:absolute focus:right-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white" href="#content">تخطي إلى المحتوى</a>
+
+  <header class="sticky top-0 z-40 border-b border-stone-200/80 bg-white/85 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/85">
+    <div class="h-1 bg-gradient-to-l from-amber-400 via-indigo-500 to-indigo-800"></div>
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <a href="#content" class="flex items-center gap-3 text-inherit no-underline">
+        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-indigo-950 text-amber-300 dark:bg-indigo-900" aria-hidden="true">
+          <svg viewBox="0 0 48 48" class="h-7 w-7" fill="none">
+            <path d="M24 42V16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <ellipse cx="24" cy="12" rx="3" ry="4.5" fill="#fde68a"/>
+            <path d="M24 30c-6-1.5-9-5.5-9-9 4 .4 7 2.6 9 6 2-3.4 5-5.6 9-6 0 3.5-3 7.5-9 9z" fill="currentColor"/>
+            <path d="M24 22c-5-1-7.5-4-7.5-7 3 .3 5.5 2 7.5 4.6 2-2.6 4.5-4.3 7.5-4.6 0 3-2.5 6-7.5 7z" fill="#fbbf24"/>
+          </svg>
+        </span>
+        <span>
+          <span class="block text-xs font-bold text-indigo-700 dark:text-indigo-300">الصف الحادي عشر · الوحدة الأولى · هدف التعلم ب</span>
+          <strong class="font-display text-lg leading-tight">محاكي المدير أحمد</strong>
+        </span>
+      </a>
+      <div class="flex flex-wrap items-center gap-2">
+        <p id="sticky-kicker" class="rounded-full bg-stone-100 px-3 py-1.5 text-sm font-bold text-slate-700 dark:bg-slate-800 dark:text-slate-200">الموقف 1 من 20</p>
+        <button id="theme-toggle" type="button" class="rounded-full bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-indigo-700 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-amber-200" aria-pressed="true">المظهر الفاتح</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content" class="mx-auto max-w-7xl px-4 py-8 md:py-10">
+    <header class="mb-8 max-w-4xl">
+      <p class="mb-2 text-sm font-bold text-indigo-700 dark:text-indigo-300">تكنولوجيا المعلومات · إدارة البيانات ودعم القرار</p>
+      <h1 class="font-display text-3xl font-bold leading-snug text-slate-950 dark:text-white md:text-4xl">محاكي قرارات المدير أحمد: إدارة البيانات والأزمات في مخبز القمح الذهبي</h1>
+      <p class="mt-4 text-lg text-slate-700 dark:text-slate-300">تؤدين هنا دور المدير أحمد في صباح عمل واحد بمخبز القمح الذهبي. أمامك عشرون موقفاً، ويُعرض موقف واحد في كل مرة. اقرئي كلام الموظفة وماذا تقول البيانات، ثم قارني ذلك بالرصيد والمخزون والأجهزة وتقرير الحضور. يبقى القرار المقترح مخفياً إلى حين المناقشة.</p>
+    </header>
+
+    <div class="grid items-start gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
+      <aside class="lg:sticky lg:top-24">
+        <section class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900" aria-labelledby="facts-title">
+          <div class="h-1.5 bg-gradient-to-l from-amber-400 via-indigo-500 to-indigo-800"></div>
+          <div class="p-5">
+            <p class="text-xs font-bold text-amber-700 dark:text-amber-300">بطاقة لا تتبدل</p>
+            <h2 id="facts-title" class="font-display mt-1 text-2xl font-bold leading-snug">معطيات المدير أحمد الحالية</h2>
+            <ul class="mt-4 space-y-3">
+              <li data-key="cash" class="stat flex gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-amber-100 text-amber-800 dark:bg-amber-400/15 dark:text-amber-200" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v10c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg>
+                </span>
+                <p><strong>الرصيد المالي المتاح: </strong>80 ديناراً كاش فقط.</p>
+              </li>
+              <li data-key="stock" class="stat flex gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-amber-100 text-amber-800 dark:bg-amber-400/15 dark:text-amber-200" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21V8"/><ellipse cx="12" cy="6.5" rx="1.6" ry="2.4" fill="currentColor" stroke="none"/><path d="M12 16c-3-.6-5-2.2-5-4 2 .2 3.6 1.2 4.6 2.6C12.6 13.2 14.2 12.2 16.2 12c0 1.8-2 3.4-4.2 4z" fill="currentColor" stroke="none"/><path d="M12 12c-2.4-.5-4-1.8-4-3.2 1.6.2 2.8 1 3.6 2 .8-1 2-1.8 3.6-2 0 1.4-1.6 2.7-3.2 3.2z" fill="currentColor" stroke="none"/></svg>
+                </span>
+                <p><strong>حالة المخزون: </strong>الدقيق يكفي ليومين فقط.</p>
+              </li>
+              <li data-key="devices" class="stat flex gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-indigo-100 text-indigo-800 dark:bg-indigo-400/15 dark:text-indigo-200" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+                </span>
+                <p><strong>الأجهزة والتشغيل: </strong>لابتوب رئيسي، شاشة مطبخ، ونظام إلكتروني للمبيعات.</p>
+              </li>
+              <li data-key="staff" class="stat flex gap-3 rounded-2xl border border-stone-200 bg-stone-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-teal-100 text-teal-800 dark:bg-teal-400/15 dark:text-teal-200" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="2.4"/><circle cx="16" cy="10" r="2"/><path d="M4.8 18.2c.6-2.2 2.3-3.4 4.2-3.4s3.6 1.2 4.2 3.4M13.2 14.8c1.3-.5 2.6-.4 3.6.2 1 .6 1.6 1.6 1.9 3.2"/></svg>
+                </span>
+                <p><strong>تقرير الموظفين: </strong>الجميع متاح ولا توجد غيابات اليوم.</p>
+              </li>
+            </ul>
+            <p class="mt-4 rounded-2xl bg-indigo-50 px-3 py-3 text-sm font-medium text-indigo-950 dark:bg-indigo-500/10 dark:text-indigo-100">كل المواقف في هذا الصباح نفسه. الرصيد والمخزون والأجهزة والحضور تبقى كما هي، ولا يُخصم مبلغ أي موقف من الثمانين ديناراً عند الانتقال إلى الموقف التالي.</p>
+          </div>
+        </section>
+      </aside>
+
+      <section aria-label="عرض المواقف">
+        <article id="scenario-card" data-tone="amber" class="relative overflow-hidden rounded-3xl border border-stone-200 bg-white p-5 shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900 md:p-7" aria-labelledby="scenario-title">
+          <div class="relative">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <p id="kicker" class="text-sm font-bold text-slate-500 dark:text-slate-400">الموقف 1 من 20</p>
+              <p id="badge" data-tone="amber" class="badge rounded-full px-3 py-1 text-sm font-extrabold">مالي</p>
+            </div>
+            <h2 id="scenario-title" tabindex="-1" class="font-display mt-3 text-3xl font-bold leading-snug outline-none">أزمة النسكافيه والرفاهية</h2>
+            <div class="mt-5">
+              <p class="text-sm font-extrabold text-slate-500 dark:text-slate-400">كلام الموظفة</p>
+              <blockquote id="speech-wrap" class="mt-2 rounded-2xl bg-stone-50 py-4 pe-4 ps-5 dark:bg-slate-800/60">
+                <p id="speech" class="text-xl leading-relaxed text-slate-800 dark:text-slate-100"></p>
+                <footer class="mt-4 flex items-center gap-3">
+                  <span id="avatar" class="grid h-11 w-11 place-items-center rounded-full text-lg font-extrabold" aria-hidden="true"></span>
+                  <span id="who" class="font-bold"></span>
+                </footer>
+              </blockquote>
+            </div>
+
+            <div class="mt-5 rounded-2xl border border-stone-200 p-4 dark:border-slate-700 md:p-5">
+              <h3 class="font-display text-xl font-bold">ماذا تقول البيانات؟</h3>
+              <ul id="points" class="mt-3 list-disc space-y-2 ps-5"></ul>
+              <div id="table-slot" class="mt-4" hidden></div>
+              <p id="link-note" class="mt-4 rounded-2xl bg-stone-100 px-4 py-3 text-sm font-bold text-slate-700 dark:bg-slate-800 dark:text-slate-200"></p>
+            </div>
+
+            <p class="mt-4 text-sm font-medium text-slate-600 dark:text-slate-300">القرار المقترح ما زال مخفياً. الزر للمعلمة أو الطالبات حين يحين وقت المناقشة.</p>
+
+            <button id="toggle-analysis" type="button" class="mt-3 flex w-full items-center justify-between gap-3 rounded-2xl bg-indigo-600 px-4 py-4 text-start font-extrabold text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-500" aria-expanded="false" aria-controls="analysis-panel">
+              <span>اتخاذ القرار المقترح</span>
+              <span class="flex items-center gap-2 text-sm">
+                <span id="toggle-state">إظهار</span>
+                <svg class="chevron h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.2 7.5 10 12.3l4.8-4.8 1.2 1.2L10 14.7 4 8.7z"/></svg>
+              </span>
+            </button>
+
+            <div id="analysis" class="analysis" aria-hidden="true">
+              <div id="analysis-panel">
+                <div class="space-y-4 pt-4">
+                  <div class="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-rose-950 dark:border-rose-400/30 dark:bg-rose-400/10 dark:text-rose-100 md:p-5">
+                    <h3 class="font-display text-xl font-bold">أثر قبول الموقف كما هو</h3>
+                    <p id="risk" class="mt-2"></p>
+                  </div>
+                  <div class="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-amber-950 dark:border-amber-400/40 dark:bg-amber-400/10 dark:text-amber-50 md:p-5">
+                    <h3 class="font-display text-xl font-bold">القرار المقترح</h3>
+                    <p id="decision" class="mt-2 text-lg font-medium"></p>
+                  </div>
+                  <p id="skill" class="text-sm font-bold text-indigo-800 dark:text-indigo-200"></p>
+                  <div class="rounded-2xl border border-dashed border-stone-300 p-4 dark:border-slate-600">
+                    <h3 class="font-display text-lg font-bold">سؤال للنقاش</h3>
+                    <p id="discuss" class="mt-1"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p id="end-note" hidden class="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 font-bold text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-100">هذا آخر المواقف العشرين. يمكن الرجوع من خريطة المواقف أو بزر الموقف السابق.</p>
+
+            <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <button id="prev" type="button" class="rounded-2xl border border-stone-300 bg-white px-4 py-3 font-extrabold text-slate-800 hover:border-indigo-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">الموقف السابق <span dir="ltr" aria-hidden="true">⬅️</span></button>
+              <button id="next" type="button" class="rounded-2xl bg-slate-900 px-4 py-3 font-extrabold text-white hover:bg-indigo-700 dark:bg-amber-300 dark:text-slate-950 dark:hover:bg-amber-200">الموقف التالي <span dir="ltr" aria-hidden="true">➡️</span></button>
+            </div>
+            <div class="mt-4" aria-hidden="false">
+              <div class="mb-1 flex items-center justify-between text-sm font-bold text-slate-500 dark:text-slate-400">
+                <span>تقدّم العرض</span>
+                <span id="seen-label">تمت زيارة 1 من 20</span>
+              </div>
+              <div id="progress" class="h-2 overflow-hidden rounded-full bg-stone-200 dark:bg-slate-800" role="progressbar" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1" aria-label="رقم الموقف الحالي">
+                <div id="progress-bar" class="h-full rounded-full bg-indigo-600 dark:bg-amber-300" style="width:5%"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <section class="mt-6 rounded-3xl border border-stone-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900" aria-labelledby="map-title">
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 id="map-title" class="font-display text-2xl font-bold">خريطة المواقف</h2>
+              <p class="text-sm text-slate-600 dark:text-slate-300">اضغطي الرقم للانتقال. اللون يدل على التصنيف، والإطار الممتلئ هو الموقف المعروض.</p>
+            </div>
+          </div>
+          <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold" aria-label="دليل التصنيفات">
+            <li class="legend" data-tone="amber">مالي</li>
+            <li class="legend" data-tone="sky">بيانات</li>
+            <li class="legend" data-tone="rose">أمان</li>
+            <li class="legend" data-tone="violet">تقني</li>
+            <li class="legend" data-tone="teal">تشغيلي</li>
+            <li class="legend" data-tone="emerald">موثوقية</li>
+          </ul>
+          <nav class="mt-4" aria-label="الانتقال إلى موقف برقمه">
+            <div id="map" class="grid grid-cols-5 gap-2 sm:grid-cols-10"></div>
+          </nav>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="border-t border-stone-200 px-4 py-6 text-center text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
+    <p>الصف الحادي عشر · الوحدة الأولى · هدف التعلم ب · تكنولوجيا المعلومات</p>
+    <p class="mt-1">للتنقل بلوحة المفاتيح: السهم للأسفل أو لليسار يعرض الموقف التالي، والسهم للأعلى أو لليمين يعرض الموقف السابق.</p>
+  </footer>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+
+  <noscript>
+    <p class="mx-auto max-w-3xl px-4 py-6 text-lg font-bold">يحتاج هذا المحاكي إلى تشغيل سكربت الصفحة في المتصفح حتى تتنقلي بين المواقف.</p>
+  </noscript>
+
+  <script>
+    const scenarios = [
+      {
+        id: 1,
+        title: "أزمة النسكافيه والرفاهية",
+        category: "مالي",
+        tone: "amber",
+        employee: "ليلى",
+        role: "مسؤولة المبيعات",
+        relates: ["cash", "stock"],
+        speech: "أستاذ أحمد، الفريق واقف منذ الفجر وملامحهم متعبة. أرجوك، عشرون ديناراً فقط من الصندوق لشراء قهوة ونسكافيه. الجو سيتغير، والمبلغ لا يُذكر أمام يوم كامل من العمل.",
+        points: [
+          "الرصيد المتاح 80 ديناراً كاش فقط، وطلب المشروبات 20 ديناراً، أي ربع السيولة في بند لا يُنتج خبزاً ولا يبيع طلبية.",
+          "الدقيق يكفي ليومين فقط، فتأجيل شرائه أخطر على استمرار المخبز من تأجيل الضيافة.",
+          "تقرير الموظفين لا يُظهر غياباً ولا ضغطاً يبرر صرفاً استثنائياً هذا الصباح."
+        ],
+        risk: "قبول الطلب ينقص الصندوق قبل تأمين المادة الأساسية، وقد يتوقف الفرن بينما تتحسن المعنويات وقتاً قصيراً ثم ينقطع البيع.",
+        decision: "يُرفض الصرف الآن. تُوجَّه السيولة المتاحة لشراء الدقيق أولاً. تُؤجَّل رفاهية المشروبات إلى ما بعد تأمين المخزون، ويُشرَح سبب الرفض للفريق بوضوح حتى لا يُفهم القرار إهمالاً لهم.",
+        skill: "تمييز الإنفاق الضروري من الإنفاق الكمالي حين تكون السيولة شحيحة والمخزون حرجاً.",
+        discuss: "كيف نوضح للفريق سبب رفض الضيافة من غير أن يبدو القرار إهمالاً لجهودهم؟"
+      },
+      {
+        id: 2,
+        title: "إغراء الإعلان السريع",
+        category: "مالي",
+        tone: "amber",
+        employee: "هند",
+        role: "منسقة التسويق",
+        relates: ["cash", "stock"],
+        speech: "مديرنا، وصلتني حملة إعلان ممول تظهر فوراً مقابل خمسين ديناراً. يعدوننا بوصول سريع خلال ساعة، وأخشى أن تضيع الفرصة إن انتظرنا إلى الغد.",
+        points: [
+          "خصم 50 ديناراً من أصل 80 يُبقي 30 ديناراً فقط، وذلك من غير شراء الدقيق.",
+          "الدقيق يكفي ليومين. الإعلان يجلب طلباً، لكن المخبز لا يملك مادة تكفي لتلبية هذا الطلب إن نفذ المخزون.",
+          "لا توجد في الموقف بيانات مبيعات تُثبت أن هذا الإعلان يعيد المبلغ قبل نفاد الدقيق."
+        ],
+        risk: "صرف نصف الرصيد تقريباً على الظهور، ثم نفاد الطحين، فيصل الزبون إلى مخبز لا يستطيع أن يبيعه. الوصول بلا منتج يحوّل الإعلان إلى خيبة وسمعة أضعف.",
+        decision: "يُؤجَّل الإعلان. الأولوية شراء الدقيق من الرصيد المتاح. أي حملة لاحقة تُخطط بعد استقرار المخزون، وتُقاس بنتيجة المبيعات الفعلية لا بوعد الوصول السريع وحده.",
+        skill: "ربط كلفة التسويق بقدرة التشغيل الحقيقية قبل صرف السيولة.",
+        discuss: "ما الفرق بين كثرة من يرى الإعلان وقدرة المخبز على تسليم الطلب بعد نفاد الدقيق؟"
+      },
+      {
+        id: 3,
+        title: "تكلفة السفر والرحلة",
+        category: "مالي",
+        tone: "amber",
+        employee: "سعاد",
+        role: "موظفة المشتريات",
+        relates: ["cash", "stock"],
+        speech: "المورد البعيد جهّز صنفاً أفضّله، وأحتاج خمسة عشر ديناراً أجرة تكسي للوصول إليه اليوم. المورد المحلي متوفر وقريب، لكني أرى أن مشوار البعيد يستحق هذه الكلفة.",
+        points: [
+          "أجرة الطريق 15 ديناراً تُخصم من سيولة لا تتجاوز 80 ديناراً، والمورد المحلي متوفر من غير هذه الكلفة.",
+          "الدقيق يكفي ليومين، فالزمن هنا قيد تشغيلي لا تفصيل ثانوي.",
+          "الموقف لا يقدّم فرق سعر يثبت أن المورد البعيد أوفر بعد إضافة أجرة التكسي."
+        ],
+        risk: "صرف الأجرة على رحلة غير لازمة يؤخر الشراء ويقلل النقد، بينما مصدر محلي قادر على التوريد موجود أصلاً.",
+        decision: "يُعتمد المورد المحلي اليوم. لا تُصرف أجرة التكسي ما دام البديل القريب متوفراً ويلبي الحاجة قبل نفاد الدقيق. إن بقي اهتمام بالصنف البعيد، تُقارن كلفته كاملة مع النقل حين تتسع السيولة، وتُوثَّق المقارنة في سجل المشتريات.",
+        skill: "حساب الكلفة الكاملة، ومن ضمنها النقل والزمن، قبل الموافقة على الرحلة.",
+        discuss: "متى تصبح أجرة الطريق بنداً مقبولاً، وما الشرط الذي غاب في هذا الصباح؟"
+      },
+      {
+        id: 4,
+        title: "أزمة العنوان الوهمي",
+        category: "تشغيلي وتقني",
+        tone: "teal",
+        employee: "رنا",
+        role: "موظفة الطلبات",
+        relates: ["devices"],
+        speech: "سائق التوصيل عاد غاضباً والطلبية تضررت. العنوان في النظام بلا رقم مبنى يكفي للوصول، ورقم الهاتف ناقص. الحقول قبلت البيانات الناقصة فلم ينتبه أحد للخطأ قبل خروج السائق.",
+        points: [
+          "نظام المبيعات سمح بحفظ عنوان وهاتف غير صالحين، فخرجت الطلبية على بيانات لا توصل إلى الزبون.",
+          "غياب ضابط الإدخال، مثل قناع يمنع حفظ هاتف ناقص، حوّل خطأ الكتابة إلى خسارة تشغيل.",
+          "الشاشة والهاتف الناقص ليسا تفصيلاً شكلياً: السائق ضاع، والطلبية تضررت، والزبون لم يُخدم."
+        ],
+        risk: "الاستمرار بإرسال طلبيات من سجلات ناقصة يكرر تلف البضاعة، ويتعب السائق، ويهز ثقة الزبائن في التوصيل.",
+        decision: "تُوقف الطلبية المعيبة ولا يُبنى عليها توصيل جديد. يُصحَّح السجل من مصدر موثوق، بالاتصال بالزبون على رقم متحقق، قبل أي إرسال. يُفرض قناع إدخال: لا يُحفظ الهاتف إلا إذا اكتملت خانات الرقم الأردني، ولا يُحفظ العنوان بلا رقم مبنى. النظام يرفض الحفظ الناقص بدل أن ينبّه بعد خروج السائق.",
+        skill: "فهم أثر صحة الإدخال في العملية: البيانات الناقصة توقف التوصيل كما يوقفه عطل في الطريق.",
+        discuss: "ما الحقول التي يجب أن يرفض النظام حفظها إن كانت ناقصة، قبل أن يتحرك السائق؟"
+      },
+      {
+        id: 5,
+        title: "الاختراق وكلمات المرور",
+        category: "أمان",
+        tone: "rose",
+        employee: "ميس",
+        role: "مساعدة الإدارة",
+        relates: ["devices"],
+        speech: "دخلت إلى نظام المبيعات فوجدت كلمة المرور 123456. وفوق ذلك، صور الوصفات وبعض أرقام العمل تُرسل في مجموعة واتساب فيها أشخاص من خارج المخبز. المجموعة ليست مكاناً مغلقاً على الفريق.",
+        points: [
+          "كلمة المرور 123456 قصيرة ومتوقعة، واللابتوب ونظام المبيعات يحملان بيانات الزبائن والطلبيات.",
+          "مجموعة واتساب غير المضبوطة ليست قناة عمل آمنة للوصفات ولا لأرقام الزبائن.",
+          "الجهاز نفسه سليم في الوصف، لكن طريقة الدخول وطريقة المشاركة تجعله مكشوفاً."
+        ],
+        risk: "بقاء كلمة المرور الضعيفة يفتح النظام لمن يجرب كلمات شائعة. بقاء الصور والأرقام في المجموعة يسرّب معرفة العمل وبيانات الناس إلى خارج المخبز.",
+        decision: "تُغيَّر كلمة المرور فوراً إلى كلمة طويلة وفريدة لا تُشارك في رسالة. تُسحب الوصفات وبيانات الزبائن من المجموعة، ويُمنع إعادة إرسالها هناك. المشاركة تنتقل إلى النظام الداخلي بصلاحيات محددة: كل موظفة ترى ما تحتاجه لعملها فقط.",
+        skill: "حماية الدخول إلى النظام، ومنع تداول بيانات العمل في قنوات غير آمنة.",
+        discuss: "ما الذي يجوز أن يمر في مجموعة المراسلة العامة، وما الذي يجب أن يبقى داخل النظام؟"
+      },
+      {
+        id: 6,
+        title: "التسرع بنشر بيانات خاطئة",
+        category: "بيانات وتسويق",
+        tone: "sky",
+        employee: "دانية",
+        role: "مسؤولة النشر",
+        relates: [],
+        speech: "نشرت قبل قليل على إنستغرام أن المخبز يقدّم منتجات خالية من الجلوتين. الناس بدأت تسأل وتطلب، وأنا لم أطابق الكلام مع بطاقة المكونات ولا مع بيان المورد. كتبت المنشور لأني ظننت أن الجملة تجذب الزبائن.",
+        points: [
+          "المنشور ادعاء غذائي، ومصدره انطباع الموظفة لا بطاقة المكونات ولا بيان المورد.",
+          "المعطيات الثابتة للصندوق لا تحسم هذا الموقف؛ الحاسم هو: هل طابقنا المعلومة مع مصدرها قبل النشر؟",
+          "الادعاء، كما وصل، غير صحيح، وقد بُني عليه تفاعل زبائن بالفعل."
+        ],
+        risk: "معلومة غذائية خاطئة تضلل الزبون، وقد تضر من يتجنب الجلوتين لسبب صحي، وتفقد المخبز ثقته حين ينكشف الفرق بين المنشور والمنتج.",
+        decision: "يُحذف المنشور فوراً، ويُنشر تصحيح صريح بأن العبارة السابقة لم تكن مدققة وهي غير صحيحة. لا يُنشر أي ادعاء عن المكونات إلا بعد مطابقته مع بطاقة الوصفة المعتمدة وبيان المورد، ثم مراجعته من شخص ثانٍ قبل الضغط على النشر.",
+        skill: "التحقق من المصدر قبل تحويل البيان إلى رسالة عامة للزبائن.",
+        discuss: "ما أول خطوة بعد اكتشاف أن منشوراً عن الغذاء خرج إلى الناس بلا مصدر موثوق؟"
+      },
+      {
+        id: 7,
+        title: "غياب النسخ الاحتياطي",
+        category: "تقني",
+        tone: "violet",
+        employee: "لينا",
+        role: "موظفة الاستقبال",
+        relates: ["devices"],
+        speech: "اللابتوب الرئيسي تجمّد ولم يعد يستجيب. عليه قاعدة بيانات الزبائن والطلبيات كلها. بحثت عن نسخة احتياطية يمكن أن نرجع إليها فلم أجد. لا أذكر أننا أخذنا نسخة على جهاز آخر.",
+        points: [
+          "الأجهزة المذكورة في المعطيات تجعل اللابتوب الرئيسي مكان حفظ قاعدة الزبائن، وهو الآن متوقف.",
+          "لا توجد نسخة احتياطية على وسيط منفصل، فتعطل جهاز واحد يهدد أسماء الزبائن وعناوينهم وسجل الطلبات.",
+          "نظام المبيعات الإلكتروني لا ينفع المخبز إن كانت بياناته محبوسة في جهاز لا يفتح ولا نسخة له."
+        ],
+        risk: "محاولات عشوائية قد تزيد التلف. وإن ضاعت القاعدة، يتوقف التواصل والتوصيل ومعرفة الطلبات السابقة، حتى لو بقي الدقيق والفريق حاضرين.",
+        decision: "تُوقف المحاولات العشوائية على الجهاز، ويُطلب دعم فني لاستعادته إن أمكن. بعد ذلك تُنشأ نسخة احتياطية على وسيط منفصل، تُحدَّث بانتظام، ويُختبر استرجاعها فعلياً لا مجرد وجود ملف. لا يعود المخبز معتمداً على اللابتوب وحده لحفظ بيانات الزبائن.",
+        skill: "استمرارية العمل: النسخ الاحتياطي يُقاس بإمكانية الاسترجاع لا بوجود الجهاز فقط.",
+        discuss: "ماذا نطلب من النسخة الاحتياطية غير أنها «ملف قديم»: أين تُحفظ، ومتى نختبر أننا نستطيع استرجاعها؟"
+      },
+      {
+        id: 8,
+        title: "الاعتماد على مصدر تيك توك غير موثوق",
+        category: "بيانات",
+        tone: "sky",
+        employee: "رهف",
+        role: "مساعدة الإنتاج",
+        relates: ["stock"],
+        speech: "شاهدت مقطعاً على تيك توك لعارض لا نعرف جهته. يقول إن حفظ العجين أياماً خارج التبريد يضاعف المبيعات، والمشاهدات كثيرة جداً. أقترح أن نطبق الطريقة من الغد على دفعات البيع كلها.",
+        points: [
+          "المصدر مقطع لجهة مجهولة، وكثرة المشاهدات ليست دليلاً على صحة طريقة الحفظ.",
+          "المخزون أصلاً يكفيه يومان من الدقيق، فتغيير أسلوب حفظ المنتج على فيديو عشوائي يضيف خطراً على الغذاء لا يوفر المادة الأولية.",
+          "لا يوجد في الموقف معيار سلامة غذاء، ولا تعليمات مورد، ولا تجربة موثقة داخل المخبز."
+        ],
+        risk: "تطبيق طريقة حفظ غير معروفة قد يفسد العجين أو يؤذي الزبون، ثم تتحول المشاهدات إلى شكوى وشحنة مردودة.",
+        decision: "يُرفض تطبيق المقطع. أي تغيير في التخزين يرجع إلى تعليمات سلامة الغذاء المعتمدة وإلى بيان المورد، لا إلى فيديو غير معروف. إن طُرح تعديل لاحقاً، يُختبر على كمية محدودة ويُوثَّق ناتجه قبل أن يمس دفعات البيع.",
+        skill: "رفض المصدر غير الموثوق حين يكون القرار متصلاً بسلامة الغذاء.",
+        discuss: "ما الصفات التي نطلبها في المصدر قبل أن نغيّر طريقة تخزين يأكلها الزبون؟"
+      },
+      {
+        id: 9,
+        title: "تحديث اللابتوب الترفيهي",
+        category: "مالي وتقني",
+        tone: "amber",
+        employee: "وئام",
+        role: "مشرفة المطبخ",
+        relates: ["cash", "devices"],
+        speech: "النسخة المجانية على شاشة المطبخ تعرض الطلبيات بوضوح. لكن النسخة المدفوعة ثمنها خمسة وثلاثون ديناراً، وتضيف ألواناً ورسوماً متحركة. المطبخ سيبدو أجمل، وأرى أننا نستحق هذه اللمسة.",
+        points: [
+          "الوظيفة المطلوبة متحققة في النسخة المجانية: عرض الطلبيات بوضوح على شاشة المطبخ.",
+          "النسخة المدفوعة بـ 35 ديناراً تضيف شكلاً لا قدرة تشغيل جديدة، من أصل رصيد 80 ديناراً.",
+          "الدقيق يكفي ليومين، فكل دينار يذهب إلى الرسوم هو دينار لم يذهب إلى المادة التي تُشغّل الفرن."
+        ],
+        risk: "صرف 35 ديناراً على مظهر الشاشة يضعف السيولة من غير أن يزيد صحة الطلبات أو يمنع نفاد الدقيق.",
+        decision: "تُبقى النسخة المجانية ما دامت تؤدي الغرض. يُوثَّق أن عرض الطلبيات واضح وكافٍ. أي ترقية مدفوعة تُؤجَّل إلى أن يظهر فائض بعد تأمين المخزون والالتزامات، لا لأن الألوان أجمل هذا الصباح.",
+        skill: "الاكتفاء بالحل الذي يؤدي الغرض قبل صرف النقد على تحسين شكلي.",
+        discuss: "متى تصبح النسخة المدفوعة قراراً تسنده البيانات، لا شكل الشاشة وحده؟"
+      },
+      {
+        id: 10,
+        title: "طلب مساعدة يدوية زائدة",
+        category: "مالي وموارد",
+        tone: "amber",
+        employee: "نور",
+        role: "مشرفة الوردية",
+        relates: ["cash", "staff"],
+        speech: "أقترح أن نستأجر عامل نظافة اليوم بخمسة وعشرين ديناراً نقداً. المكان يحتاج لمسة إضافية. أعلم أن الجميع حاضر، ولا يوجد ضغط طارئ ولا طلبات فوق الطاقة، لكن وجود شخص زائد سيريح الوردية.",
+        points: [
+          "تقرير الموظفين يقول إن الجميع متاح ولا توجد غيابات اليوم.",
+          "لا يوجد في الكلام ضغط طارئ ولا تراكم طلبات يفوق طاقة الفريق الحاضر.",
+          "الكلفة 25 ديناراً كاش من رصيد 80 ديناراً، لبند لا تسنده بيانات الحضور ولا بيانات التشغيل."
+        ],
+        risk: "صرف ربع الرصيد تقريباً على يد عاملة غير مبررة يقلل القدرة على شراء الدقيق، بينما الفريق القادر على العمل موجود أصلاً.",
+        decision: "يُرفض الاستئجار اليوم. تُوزَّع مهام النظافة على الفريق الحاضر وفق الوردية. لا يُصرف مبلغ ليد إضافية إلا إذا أظهر تقرير الحضور أو حجم الطلبات حاجة فعلية لا يغطيها الموجودون.",
+        skill: "مطابقة طلب الموارد مع بيانات الحضور والضغط قبل صرف النقد.",
+        discuss: "أي تقرير يجب أن نفتحه قبل الموافقة على استئجار شخص إضافي؟"
+      },
+      {
+        id: 11,
+        title: "تعارض بيانات الموردين",
+        category: "بيانات",
+        tone: "sky",
+        employee: "حنان",
+        role: "موظفة المشتريات",
+        relates: ["cash", "stock"],
+        speech: "وصلتني بيانات موردين للدقيق، وهما لا يتفقان. المورد (أ) يبيع الكيس بعشرة دنانير ويسلّم خلال ساعة. المورد (ب) يبيع الكيس بثمانية دنانير، لكن التسليم خلال ثلاثة أيام. في الصندوق ثمانون ديناراً. أي الرقمين نعتمد هذا الصباح؟",
+        points: [
+          "فرق السعر ديناران للكيس لصالح المورد (ب)، لكن تسليمه بعد ثلاثة أيام.",
+          "الدقيق يكفي ليومين فقط، فتوريد (ب) يصل بعد نفاد المخزون وتوقف الفرن.",
+          "رصيد 80 ديناراً يسمح بشراء الكمية اللازمة من المورد (أ) من غير تفريغ الصندوق كله، إن حُسبت الكمية على الأيام الحرجة لا على أقصى ما يمكن حمله."
+        ],
+        table: {
+          caption: "مقارنة عرضي الدقيق في هذا الصباح",
+          headers: ["البند", "المورد (أ)", "المورد (ب)"],
+          rows: [
+            ["سعر الكيس", "10 دنانير", "8 دنانير"],
+            ["زمن التسليم", "خلال ساعة", "خلال 3 أيام"],
+            ["مقابل مخزون يومين", "يصل قبل النفاد", "يصل بعد النفاد"],
+            ["الرصيد 80 ديناراً", "يكفي لكمية عاجلة محسوبة", "السعر الأقل لا ينفع إن توقف الفرن"]
+          ]
+        },
+        risk: "اختيار السعر الأقل وحده يوفّر دينارين في الكيس ويوقف الإنتاج يوماً على الأقل. توقف البيع أغلى من فرق السعر.",
+        decision: "يُختار المورد (أ) للكمية اللازمة لتغطية الأيام الحرجة فقط، لا لكل ما يتسع له الصندوق. يُسجَّل العرضان في جدول المقارنة هذا حتى يبقى سبب الاختيار مكتوباً. المورد (ب) يمكن أن يُستخدم لاحقاً لمخزون غير عاجل حين لا يكون الزمن هو القيد.",
+        skill: "المفاضلة بين السعر والزمن وفق قيد المخزون، لا وفق الرقم الأصغر وحده.",
+        discuss: "لو كان الدقيق يكفي عشرة أيام لا يومين، هل يتغير الاختيار؟ ما المعطى الذي قلب القرار هذا الصباح؟"
+      },
+      {
+        id: 12,
+        title: "تسريب بيانات عميل بالخطأ",
+        category: "أمان وخصوصية",
+        tone: "rose",
+        employee: "سارة",
+        role: "موظفة المبيعات",
+        relates: ["devices"],
+        speech: "وقعت في خطأ قبل قليل. أرسلت تفاصيل فاتورة عميل مهم، ومعها عنوان منزله ورقم هاتفه، إلى مجموعة عامة. في المجموعة موظفات مؤقتات وأشخاص لا علاقة لهم بهذا الطلب. انتبهت بعد الإرسال، والرسالة ما زالت ظاهرة.",
+        points: [
+          "الفاتورة والعنوان والهاتف بيانات شخصية، وخرجت من قناة العمل المحددة إلى مجموعة يرآها من لا يحتاجها.",
+          "نظام المبيعات هو مكان حفظ هذه البيانات، لا مجموعة المراسلة العامة.",
+          "حذف الرسالة من جهاز المرسلة وحدها لا يعني أنها اختفت عند بقية الأعضاء."
+        ],
+        risk: "بقاء الرسالة يعرّض عنوان العميل وهاتفه وتفاصيل شرائه لمن لا شأن له بها، ويهز ثقته بالمخبز إن علم أن بيته صار في مجموعة عامة.",
+        decision: "تُحذف الرسالة من المجموعة فوراً، وتُوثَّق الحادثة: ماذا أُرسل، ومتى، وفي أي مجموعة. يُبلَّغ العميل بلغة واضحة ومختصرة أن بيانات فاتورته وصلت إلى مجموعة غير مخصصة ثم حُذفت. بعد ذلك تُنقل مشاركة الفواتير إلى قناة خاصة بصلاحيات محدودة، ويُدرَّب الفريق ألا تخرج بيانات العميل الشخصية من النظام.",
+        skill: "خصوصية بيانات العملاء: الحد الأدنى من الاطلاع، وتصحيح التسريب فور اكتشافه.",
+        discuss: "بعد حذف الرسالة، ماذا نقول للعميل، وما الذي يجب أن يتغير في طريقة إرسال الفواتير؟"
+      },
+      {
+        id: 13,
+        title: "طلب زيادة راتب فورية",
+        category: "مالي",
+        tone: "amber",
+        employee: "أمل",
+        role: "موظفة الإنتاج",
+        relates: ["cash", "stock"],
+        speech: "يا مدير، المعيشة غلت وأنا أعمل منذ الصباح الباكر. أطلب زيادة تُصرف لي نقداً من الصندوق اليوم. الرصيد ثمانون ديناراً، وأرى أن المخبز يستطيع ذلك الآن. لا أريد وعوداً مؤجلة.",
+        points: [
+          "الثمانون ديناراً هي سيولة التشغيل هذا الصباح، لا فائض أرباح مُعلن جاهز للتوزيع.",
+          "الدقيق يكفي ليومين، فأي نقد يخرج من الصندوق قبل شراء المادة الأساسية يهدد الإنتاج ورواتب الفترة القادمة معاً.",
+          "طلب الزيادة لم يُرفق بسجل أداء ولا بميزانية، بل بضغط اللحظة وغلاء المعيشة."
+        ],
+        risk: "صرف الزيادة فوراً يستهلك نقد شراء الدقيق، وقد يتوقف المخبز عن العمل فيخسر الفريق الدخل الذي طُلبت الزيادة لحمايته.",
+        decision: "يُرفض الصرف الفوري بلباقة ووضوح. يُبيَّن أن الصندوق هذا الصباح مخصص لاستمرار التشغيل، وأوله الدقيق. تُجدول مراجعة الأجور عندما تُظهر بيانات المبيعات فائضاً حقيقياً بعد الالتزامات، لا من رصيد الطوارئ في يوم الشح.",
+        skill: "فصل سيولة التشغيل عن طلبات الصرف الشخصي، مهما كان الطلب مفهوماً إنسانياً.",
+        discuss: "لماذا لا نعدّ رصيد الثمانين ديناراً فائضاً يمكن توزيعه لمجرد أنه موجود في الصندوق؟"
+      },
+      {
+        id: 14,
+        title: "عطل شاشة المطبخ",
+        category: "تقني وبنية تحتية",
+        tone: "violet",
+        employee: "لمى",
+        role: "منسقة الطلبات",
+        relates: ["devices"],
+        speech: "شاشة المطبخ انطفأت منذ الصباح. لوحة الطلبات لا تعرض شيئاً، والطلبيات بدأت تصل على ورق. الطباخون يخلطون بين طلبين متشابهين. نظام المبيعات على اللابتوب ما زال يسجّل، لكن المطبخ لا يرى الشاشة.",
+        points: [
+          "المتعطلة هي شاشة العرض في المطبخ، لا نظام المبيعات نفسه. اللابتوب ما زال مصدر التسجيل.",
+          "الورق بلا رقم واضح وبلا وقت يفتح باب الخلط بين الطلبات المتشابهة.",
+          "رصيد الصندوق لا يبرر شراء شاشة جديدة قبل فحص بسيط للتيار والتوصيل، والدقيق أولى من جهاز بديل غير مشخص."
+        ],
+        risk: "البيع العشوائي على ورق غير مرقم يضاعف الطلب، ويُسقط طلبيات، ويخلق بيانات لا تطابق ما في النظام.",
+        decision: "لا يُوقف البيع، ولا تُشترى شاشة قبل الفحص. اللابتوب يبقى مصدر الحقيقة: موظفة تقرأ الطلبات منه بترتيب واضح، أو تُطبع قائمة مرقمة كل فترة قصيرة. كل ورقة تأخذ رقم الطلب والوقت. يُسجَّل العطل ويُفحص التوصيل والتيار. لا تُدخل طلبات جديدة خارج النظام حتى لا يصبح للمخبز سجلان مختلفان.",
+        skill: "استمرار الخدمة عند تعطل لوحة العرض، مع الإبقاء على مصدر بيانات واحد.",
+        discuss: "ما المصدر الذي نرجع إليه كل الطلبات ما دامت شاشة المطبخ متوقفة؟"
+      },
+      {
+        id: 15,
+        title: "حملة استطلاع رأي عشوائية",
+        category: "جمع بيانات",
+        tone: "sky",
+        employee: "ياسمين",
+        role: "موظفة التسويق",
+        relates: [],
+        speech: "عندي حملة سريعة نجمع بها آراء الناس. نقف في الشارع ونسأل أي مارّ: ألا ترى أن منتجات مخبزنا ممتازة؟ والجواب المسموح نعم أو لا فقط. نجمع عشرات الأوراق ثم ننشر أن الجميع راضون.",
+        points: [
+          "العينة من المارة، لا من الزبائن الذين اشتروا فعلاً، فلا تمثل من جرّب المنتج.",
+          "السؤال مغلق وموجّه نحو الإجابة بنعم، فلا يقيس السبب ولا درجة الرضا.",
+          "تعميم النتيجة على «الجميع» أكبر من البيانات التي ستُجمع، والصندوق والمخزون لا يصلحان هذا العيب."
+        ],
+        risk: "نشر ادعاء الرضا التام على استطلاع موجه يضلل الزبون والإدارة معاً، وتُبنى عليه قرارات منتجات لا تسندها آراء من اشترى.",
+        decision: "يُرفض استخدام هذا الاستطلاع دليلاً، ويُرفض نشر أن الجميع راضون. إن لزم قياس الرضا، تُسأل زبائن اشتروا فعلاً، بأسئلة محايدة غير موجهة، وبتدرج أوضح من نعم ولا وحدهما. عند النشر يُذكر من سُئل، وكم عددهن، وفي أي فترة، من غير تعميم يفوق العينة.",
+        skill: "جودة أداة الجمع: العينة والسؤال يحددان إن كانت النتيجة معلومة أم انطباعاً موجهاً.",
+        discuss: "لماذا لا تصلح إجابات الشارع المغلقة دليلاً ننشر على أساسه رضا الزبائن؟"
+      },
+      {
+        id: 16,
+        title: "خطأ تسعير المنتجات",
+        category: "بيانات مالية",
+        tone: "sky",
+        employee: "هبة",
+        role: "موظفة الصندوق",
+        relates: ["devices"],
+        speech: "راجعت تقرير الأسبوع ووجدت أمراً لا يستقيم. نظام المبيعات كان يسجّل سعر المعجنات أقل بنسبة 2070٪ طوال الأسبوع الماضي. بعض الفواتير خرجت بقيم لا تشبه قائمة أسعارنا. توقفت عن تصحيح الرقم لأني لا أثق بالتقرير قبل مراجعتك.",
+        points: [
+          "نسبة 2070٪ ظهرت في النظام، لكن تخفيضاً يتجاوز مئة في المئة لا يصنع سعر بيع: إما أن السعر يصبح صفراً أو يصير سالباً، وكلاهما قيمة فاسدة.",
+          "التقرير إذن علامة على خطأ إدخال أو معادلة أو خانة، لا على خصم حقيقي يمكن إعلانه.",
+          "فواتير الأسبوع هي المصدر الذي يُطابق قائمة الأسعار، لا الخانة الغريبة في أسفل التقرير."
+        ],
+        risk: "اعتماد 2070٪ في حساب الخسارة أو في اعتذار علني ينشر رقماً مستحيلاً، وقد يصلح النظام على أساس خاطئ فيستمر التسعير المعطوب.",
+        decision: "يُوقف الاعتماد على هذا التقرير في أي قرار مالي أو منشور. تُسحب عينة من فواتير الأسبوع وتُقارن بسعر القائمة المعتمد. تُصحَّح المعادلة أو الخانة من السجل الأصلي، ثم يُعاد حساب الفرق بعد المطابقة فقط. لا تُقال نسبة 2070٪ للزبائن، ولا تُعتمد خسارة حتى تثبتها الفواتير.",
+        skill: "اكتشاف القيمة غير المنطقية، ورفضها إلى أن طابقناها مع المصدر.",
+        discuss: "لماذا لا ننشر نسبة 2070٪ ولا نحسب عليها خسارة الأسبوع قبل فتح الفواتير الأصلية؟"
+      },
+      {
+        id: 17,
+        title: "استخدام الفلاشات الشخصية",
+        category: "أمان تقني",
+        tone: "rose",
+        employee: "فرح",
+        role: "مساعدة المطبخ",
+        relates: ["devices"],
+        speech: "الخباز أوصل فلاشة لا نعرف مصدرها إلى لابتوب الإدارة حتى ينسخ أغانٍ. بعد لحظات تباطأ الجهاز، وظهرت نافذة غريبة تطلب إذناً بالتشغيل. الفلاشة ما زالت موصولة، وهو يقول إنها مجرد أغانٍ.",
+        points: [
+          "اللابتوب الرئيسي يحمل نظام المبيعات وبيانات الزبائن، والفلاشة وسيط شخصي مجهول المصدر.",
+          "ظهور نافذة غير مألوفة بعد التوصيل علامة خطر، لا تفصيل يمكن تجاهله لأن القصد كان أغاني.",
+          "فتح ملفات إضافية أو التجريب العشوائي قد يزيد ما يفعله الملف المؤذي إن وُجد."
+        ],
+        risk: "إصابة جهاز الإدارة تعطل المبيعات وتكشف بيانات الزبائن، وتكلفة ذلك أعلى بكثير من نسخ أغنية.",
+        decision: "تُنزع الفلاشة فوراً ولا تُفتح ملفات جديدة منها. يُفصل اللابتوب عن الشبكة إن أمكن، ولا يُعاد إلى عمل الصندوق قبل فحصه بحماية محدّثة عبر الدعم الفني. تُمنع الفلاشات الشخصية على لابتوب الإدارة. نقل الملفات المسموح يمر بقناة يعتمدها المخبز، لا بوسيط مجهول.",
+        skill: "منع الوسائط المجهولة من الوصول إلى الجهاز الذي يحفظ بيانات العمل.",
+        discuss: "ما القاعدة التي نعلنها للفريق عن توصيل أي فلاشة بلابتوب الإدارة؟"
+      },
+      {
+        id: 18,
+        title: "إهمال تطهير قاعدة البيانات",
+        category: "بيانات",
+        tone: "sky",
+        employee: "ريما",
+        role: "مسؤولة البيانات",
+        relates: ["devices"],
+        speech: "البحث عن زبون صار بطيئاً. قاعدة البيانات فيها آلاف السجلات المكررة، وكثير من أصحابها لم يطلب منذ سنتين. الاسم الواحد يظهر في ثلاث بطاقات بأرقام مختلفة. أقترح أن نحذف كل قديم اليوم حتى يخف النظام.",
+        points: [
+          "التكرار يبطئ البحث، ويربك التوصيل، ويجعل تقارير الزبائن أكبر من الواقع.",
+          "الحذف العشوائي لكل من لم يطلب منذ سنتين قد يمسح سجلاً ما زال مرتبطاً بفاتورة أو برقم هو الصحيح.",
+          "الحذف قبل أخذ نسخة احتياطية مخاطرة: قد يضيع السجل الصحيح مع البطاقة المكررة، ولا يبقى ما نرجع إليه."
+        ],
+        risk: "تنظيف متسرع بلا نسخة احتياطية قد يحذف الزبون النشط مع المكرر، فيخسر المخبز عنواناً صحيحاً وهو يحاول تسريع الشاشة.",
+        decision: "تُؤخذ نسخة احتياطية أولاً ويُختبر فتحها. ثم يُحدد التكرار بقاعدة واضحة، مثل الاسم مع رقم الهاتف، وتُدمج البطاقات المكررة مع الإبقاء على أحدث بيانات اتصال صحيحة. من لم يطلب منذ سنتين يُؤرشف وفق سياسة مكتوبة بدل الحذف الأعمى. بعد التطهير يُقاس زمن البحث لنعرف أن التنظيف نفع فعلاً.",
+        skill: "تطهير التكرار بعد النسخ الاحتياطي، والدمج بدل المسح العشوائي.",
+        discuss: "لماذا نأخذ نسخة احتياطية قبل حذف التكرار، وما الذي ندمجه وما الذي نؤرشفه؟"
+      },
+      {
+        id: 19,
+        title: "رفض تحديث الأمان الإجباري",
+        category: "تقني وأمان",
+        tone: "rose",
+        employee: "هدى",
+        role: "مسؤولة التقنية",
+        relates: ["devices", "staff"],
+        speech: "وصل تحديث أمني إجباري وعاجل، وتثبيته يوقف نظام التشغيل ساعة كاملة. الذروة بدأت والطلبات تتوارد والفريق كله حاضر. إن رفضنا التحديث تبقى الثغرة مفتوحة، وأنا أريد أن نوقف الاستقبال الآن ونثبّته فوراً. لا أقبل تأجيلاً مفتوحاً.",
+        points: [
+          "التحديث أمني وإجباري، فرفضه إلى أجل غير مسمى يُبقي بيانات المبيعات والزبائن على ثغرة معروفة.",
+          "إيقاف النظام ساعة في ذروة الاستقبال يوقف البيع، والفريق حاضر والطلبات قائمة، وشاشة المطبخ والنظام هما مسار الطلب.",
+          "الموقف لا يصف اختراقاً جارياً هذه اللحظة، بل تحديثاً عاجلاً يمكن حصر انتظاره بنافذة قصيرة مكتوبة."
+        ],
+        risk: "الرفض المفتوح يترك الثغرة. والتثبيت في الذروة يوقف الطلبات ساعة كاملة من غير ضرورة إن كانت هناك ساعة هدوء في اليوم نفسه.",
+        decision: "لا يُرفض التحديث، ولا يُثبَّت في ذروة الاستقبال. يُحدد أقرب وقت هدوء اليوم نفسه، بعد انحسار الذروة، ويُكتب الوقت ويُبلَّغ الفريق. حتى تلك الساعة: لا تُفتح مرفقات مجهولة، ولا تُوسَّع الصلاحيات. لو ظهرت علامة اختراق جارٍ، لا مجرد تحديث، يُوقف التشغيل فوراً. التأجيل هنا ساعة محددة لا رفض.",
+        skill: "الموازنة بين تحديث أمني عاجل واستمرار البيع في الذروة، بشرط ألا يتحول التأجيل إلى رفض.",
+        discuss: "ما الفرق بين تأجيل التحديث إلى أجل مفتوح، وتأجيله إلى ساعة هدوء محددة في اليوم نفسه؟"
+      },
+      {
+        id: 20,
+        title: "شكوى تضليل مصادر البيانات",
+        category: "موثوقية البيانات",
+        tone: "emerald",
+        employee: "ثناء",
+        role: "موظفة الخدمة",
+        relates: [],
+        speech: "اتصل زبون غاضب. اشترى كيكة كُتب في المنشور أنها صحية، ومحلّاة بالعسل، وخالية من السكر الأبيض. بطاقة التحضير في المطبخ تُظهر سكراً أبيض ضمن المكونات. يقول إن البيانات المنشورة ضللته، ويسأل أي الكلامين نصدق.",
+        points: [
+          "هناك تعارض صريح بين نص المنشور وبطاقة المطبخ للمكونات الفعلية.",
+          "المصدر الذي يصف ما دخل في الكيكة هو بطاقة التحضير، لا جملة الإعلان.",
+          "رصيد الصندوق لا يصلح هذا التعارض؛ إن بقي المنشور كما هو فالزبون التالي سيشتري على المعلومة نفسها."
+        ],
+        risk: "بقاء المنشور المخالف يكرر التضليل، ويحوّل شكوى زبون واحد إلى فقدان ثقة في كل وصف غذائي يصدر عن المخبز.",
+        decision: "يُعتذر للزبون وتُعالج شكواه وفق سياسة البيع. يُصحَّح المنشور فوراً ليطابق بطاقة المطبخ، لا العكس. القاعدة من اليوم: لا يُكتب مكّون في منشور إلا نقلاً عن بطاقة الوصفة المعتمدة، ويراجعه شخص ثانٍ قبل النشر. عند الاختلاف، البطاقة هي المصدر والمنشور هو الذي يُعدَّل.",
+        skill: "تطابق البيانات المنشورة مع مصدر المكونات الفعلي، لا مع الصيغة الأجمل تسويقياً.",
+        discuss: "أي المستندين نعدّه المصدر حين يختلفان: نص المنشور أم بطاقة المطبخ؟ ولماذا؟"
+      }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    let index = 0;
+    let open = false;
+    const seen = new Set();
+
+    function setOpen(next) {
+      open = next;
+      $("analysis").classList.toggle("is-open", open);
+      $("analysis").setAttribute("aria-hidden", String(!open));
+      $("toggle-analysis").setAttribute("aria-expanded", String(open));
+      $("toggle-state").textContent = open ? "إخفاء" : "إظهار";
+      if ("inert" in $("analysis-panel")) $("analysis-panel").inert = !open;
+    }
+
+    function renderTable(table) {
+      const slot = $("table-slot");
+      slot.replaceChildren();
+      if (!table) {
+        slot.hidden = true;
+        return;
+      }
+      slot.hidden = false;
+      const wrap = document.createElement("div");
+      wrap.className = "overflow-x-auto";
+      const tableEl = document.createElement("table");
+      tableEl.className = "cmp";
+      const caption = document.createElement("caption");
+      caption.textContent = table.caption;
+      tableEl.appendChild(caption);
+      const head = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      table.headers.forEach((label) => {
+        const cell = document.createElement("th");
+        cell.scope = "col";
+        cell.textContent = label;
+        headRow.appendChild(cell);
+      });
+      head.appendChild(headRow);
+      tableEl.appendChild(head);
+      const body = document.createElement("tbody");
+      table.rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        row.forEach((label, cellIndex) => {
+          const cell = document.createElement(cellIndex === 0 ? "th" : "td");
+          if (cellIndex === 0) cell.scope = "row";
+          cell.textContent = label;
+          tr.appendChild(cell);
+        });
+        body.appendChild(tr);
+      });
+      tableEl.appendChild(body);
+      wrap.appendChild(tableEl);
+      slot.appendChild(wrap);
+    }
+
+    function paintMap() {
+      document.querySelectorAll(".map-btn").forEach((button) => {
+        const buttonIndex = Number(button.dataset.index);
+        if (buttonIndex === index) button.setAttribute("aria-current", "true");
+        else button.removeAttribute("aria-current");
+        button.classList.toggle("is-seen", seen.has(buttonIndex));
+      });
+    }
+
+    function render(options = {}) {
+      const scenario = scenarios[index];
+      seen.add(index);
+      setOpen(false);
+      $("scenario-card").dataset.tone = scenario.tone;
+      $("badge").dataset.tone = scenario.tone;
+      $("badge").textContent = scenario.category;
+      $("kicker").textContent = `الموقف ${scenario.id} من ${scenarios.length}`;
+      $("sticky-kicker").textContent = `الموقف ${scenario.id} من ${scenarios.length}`;
+      $("scenario-title").textContent = scenario.title;
+      $("speech").textContent = scenario.speech;
+      $("avatar").textContent = scenario.employee.charAt(0);
+      $("who").textContent = `${scenario.employee} · ${scenario.role}`;
+      $("points").replaceChildren();
+      scenario.points.forEach((point) => {
+        const item = document.createElement("li");
+        item.textContent = point;
+        $("points").appendChild(item);
+      });
+      renderTable(scenario.table);
+      $("risk").textContent = scenario.risk;
+      $("decision").textContent = scenario.decision;
+      $("skill").textContent = `المهارة المستهدفة: ${scenario.skill}`;
+      $("discuss").textContent = scenario.discuss;
+      $("link-note").textContent = scenario.relates.length
+        ? "أُبرزت المعطيات المرتبطة بهذه القراءة في البطاقة الجانبية."
+        : "أرقام الصندوق ليست الحاسم في هذا الموقف؛ الحاسم جودة البيانات ومصدرها.";
+      document.querySelectorAll(".stat").forEach((item) => {
+        item.classList.toggle("is-hot", scenario.relates.includes(item.dataset.key));
+      });
+      $("end-note").hidden = index !== scenarios.length - 1;
+      $("prev").disabled = index === 0;
+      $("next").disabled = index === scenarios.length - 1;
+      $("seen-label").textContent = `تمت زيارة ${seen.size} من ${scenarios.length}`;
+      $("progress").setAttribute("aria-valuenow", String(scenario.id));
+      $("progress-bar").style.width = `${((index + 1) / scenarios.length) * 100}%`;
+      $("live").textContent = `عُرض الموقف ${scenario.id}: ${scenario.title}`;
+      document.title = `الموقف ${scenario.id} من 20 | محاكي قرارات المدير أحمد`;
+      paintMap();
+      const card = $("scenario-card");
+      card.classList.remove("rise");
+      void card.offsetWidth;
+      card.classList.add("rise");
+      if (options.focusHeading) $("scenario-title").focus();
+      if (options.scroll && window.matchMedia("(max-width: 1023px)").matches) {
+        card.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function go(to, options) {
+      if (to < 0 || to >= scenarios.length || to === index) return;
+      index = to;
+      render(options);
+    }
+
+    function buildMap() {
+      const map = $("map");
+      scenarios.forEach((scenario, scenarioIndex) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "map-btn";
+        button.dataset.tone = scenario.tone;
+        button.dataset.index = String(scenarioIndex);
+        button.textContent = String(scenario.id);
+        button.setAttribute("aria-label", `الموقف ${scenario.id}: ${scenario.title}`);
+        button.addEventListener("click", () => go(scenarioIndex, { scroll: true }));
+        map.appendChild(button);
+      });
+    }
+
+    function syncThemeButton() {
+      const dark = document.documentElement.classList.contains("dark");
+      $("theme-toggle").textContent = dark ? "المظهر الفاتح" : "المظهر الداكن";
+      $("theme-toggle").setAttribute("aria-pressed", String(dark));
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) themeMeta.content = dark ? "#020617" : "#f5f5f4";
+    }
+
+    $("theme-toggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+      const dark = document.documentElement.classList.contains("dark");
+      try {
+        localStorage.setItem("ahmed-theme", dark ? "dark" : "light");
+      } catch (err) {}
+      syncThemeButton();
+    });
+
+    $("toggle-analysis").addEventListener("click", () => {
+      setOpen(!open);
+      if (open) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        $("decision").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+      }
+    });
+
+    $("next").addEventListener("click", () => go(index + 1, { scroll: true }));
+    $("prev").addEventListener("click", () => go(index - 1, { scroll: true }));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+        event.preventDefault();
+        go(index + 1, { focusHeading: true, scroll: true });
+      } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+        event.preventDefault();
+        go(index - 1, { focusHeading: true, scroll: true });
+      }
+    });
+
+    buildMap();
+    render();
+    syncThemeButton();
+  </script>
+</body>
+</html>
